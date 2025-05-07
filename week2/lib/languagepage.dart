@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+/*import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart';*/
 import "rolepage.dart";
 
 class _LanguagePage extends State<LanguagePage> {
@@ -21,7 +21,7 @@ class _LanguagePage extends State<LanguagePage> {
               ),
             ),),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             const Center(
@@ -33,7 +33,7 @@ class _LanguagePage extends State<LanguagePage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 36,
             ),
             OutlinedButton(
@@ -44,13 +44,13 @@ class _LanguagePage extends State<LanguagePage> {
                   });
                 },
                 style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   side: BorderSide(
                       color: Button[0]
-                          ? Color.fromARGB(255, 0, 120, 249)
+                          ? const Color.fromARGB(255, 0, 120, 249)
                           : const Color.fromARGB(0, 0, 0, 0)),
                 ),
                 child: Row(
@@ -58,7 +58,7 @@ class _LanguagePage extends State<LanguagePage> {
                     Container(
                       child: Image.asset(
                           "assets/images/openmoji_flag-united-states.png"),
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                     ),
                     const Text(
                       "English",
@@ -70,7 +70,7 @@ class _LanguagePage extends State<LanguagePage> {
                     ),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             OutlinedButton(
@@ -81,13 +81,13 @@ class _LanguagePage extends State<LanguagePage> {
                   });
                 },
                 style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   side: BorderSide(
                       color: Button[1]
-                          ? Color.fromARGB(255, 0, 120, 249)
+                          ? const Color.fromARGB(255, 0, 120, 249)
                           : const Color.fromARGB(0, 0, 0, 0)),
                 ),
                 child: Row(
@@ -95,7 +95,7 @@ class _LanguagePage extends State<LanguagePage> {
                     Container(
                       child: Image.asset(
                           "assets/images/openmoji_flag-united-states.png"),
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                     ),
                     const Text(
                       "العربية",
@@ -107,7 +107,7 @@ class _LanguagePage extends State<LanguagePage> {
                     ),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Align(
@@ -119,7 +119,7 @@ class _LanguagePage extends State<LanguagePage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Container(
@@ -133,13 +133,13 @@ class _LanguagePage extends State<LanguagePage> {
           );
                 },
                 style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                    padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
                     backgroundColor: Button[0] || Button[1]
-                        ? Color.fromARGB(255, 0, 120, 249)
-                        : Color.fromARGB(204, 94, 92, 92)),
+                        ? const Color.fromARGB(255, 0, 120, 249)
+                        : const Color.fromARGB(204, 94, 92, 92)),
                 child: const Text(
                   "Continue",
                   style: TextStyle(
@@ -158,6 +158,8 @@ class _LanguagePage extends State<LanguagePage> {
 }
 
 class LanguagePage extends StatefulWidget {
+  const LanguagePage({super.key});
+
   @override
   State<LanguagePage> createState() => _LanguagePage();
 }
