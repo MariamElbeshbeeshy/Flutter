@@ -8,9 +8,11 @@ A simple and straightforward basketball score-keeping application built with Flu
 
 ## 🚀 App Demo
 
-Here's a quick look at the app in action, showing how to add points and reset the score.
+## 🚀 App Demo
 
-![Basketball Counter App Demo](https://drive.google.com/file/d/1tzfJDIp18buN7MVeTd-K0xWb64iO6D-O/view?usp=sharing)
+Watch a short video demonstration of the app in action on Google Drive.
+
+**[➡️ Watch the App Demo Here](https://drive.google.com/file/d/1tzfJDIp18buN7MVeTd-K0xWb64iO6D-O/view?usp=sharing)**
 
 ---
 
