@@ -3,7 +3,7 @@ import 'package:toku_app/views/colors_view.dart';
 import 'package:toku_app/views/family_members_view.dart';
 import 'package:toku_app/views/numbers_view.dart';
 import 'package:toku_app/views/phrases_view.dart';
-import 'package:toku_app/widgets/category_list.dart';
+import 'package:toku_app/widgets/categories.dart';
 
 
 class HomeView extends StatelessWidget {

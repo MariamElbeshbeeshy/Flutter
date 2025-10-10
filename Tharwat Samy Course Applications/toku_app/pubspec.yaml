@@ -56,11 +56,12 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/phrases/training_phrase.png
     - assets/images/numbers/
-    - assets/sounds/numbers/
     - assets/images/colors/
-    - assets/sounds/family_members/
     - assets/images/family_members/
+    - assets/sounds/numbers/
+    - assets/sounds/family_members/
     - assets/sounds/colors/
     - assets/sounds/phrases/
     
