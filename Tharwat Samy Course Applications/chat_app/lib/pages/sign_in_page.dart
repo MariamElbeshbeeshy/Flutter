@@ -1,8 +1,9 @@
+import 'package:chat_app/pages/Sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
-
+  static String id = 'Sign-in';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +52,9 @@ class SignInPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, SignUpPage.id);
+                      },
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(

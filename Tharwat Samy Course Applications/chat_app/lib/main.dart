@@ -1,8 +1,15 @@
+import 'package:chat_app/pages/Sign_up_page.dart';
 import 'package:chat_app/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MainApp()); 
 }
 
 class MainApp extends StatelessWidget {
@@ -11,6 +18,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        SignInPage.id: (context) => const SignInPage(),
+        SignUpPage.id: (context) =>  SignUpPage(),
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 8, 39, 62),
@@ -38,7 +49,11 @@ class MainApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 139, 182, 255)),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: BorderSide(color: Colors.red.shade700),
           ),
           hintStyle: TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
         ),
@@ -47,7 +62,7 @@ class MainApp extends StatelessWidget {
         ),
         textTheme: const TextTheme(titleMedium: TextStyle(color: Colors.white)),
       ),
-      home: SignInPage(),
+      initialRoute: SignInPage.id,
     );
   }
 }
