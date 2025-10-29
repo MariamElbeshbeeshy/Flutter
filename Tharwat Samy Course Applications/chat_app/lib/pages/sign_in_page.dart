@@ -1,9 +1,25 @@
 import 'package:chat_app/pages/Sign_up_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_app/functions/functions.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignInPage extends StatefulWidget {
+  SignInPage({super.key});
   static String id = 'Sign-in';
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  String? email;
+
+  String? password;
+
+  bool isLoading = false;
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +47,87 @@ class SignInPage extends StatelessWidget {
                   style: TextStyle(fontSize: 26, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(hintText: 'Email'),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter your email';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) => email = value,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(hintText: 'Email'),
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter your password';
+                          }
+
+                          return null;
+                        },
+                        onChanged: (value) => password = value,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(hintText: 'Password'),
+                        obscureText: true,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 10),
-                TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(hintText: 'Password'),
-                  obscureText: true,
-                ),
+
                 const SizedBox(height: 30),
-                OutlinedButton(onPressed: () {}, child: const Text('Sign In')),
+                OutlinedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      try {
+                        isLoading = true;
+                        setState(() {});
+                        await SignIn(email!, password!);
+                        ShowMessage(
+                          context,
+                          'Welcome',
+                          'Signed in successfully.',
+                          [],
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          ShowMessage(
+                            context,
+                            'Alert!',
+                            'No user found for that email.',
+                            [],
+                          );
+                        } else if (e.code == 'wrong-password') {
+                          ShowMessage(
+                            context,
+                            'Alert!',
+                            'Wrong password provided for that user.',
+                            [],
+                          );
+                        } else if (e.code == 'invalid-email') {
+                          ShowMessage(
+                            context,
+                            'Alert!',
+                            'The email address is badly formatted.',
+                            [],
+                          );
+                        } else {
+                          ShowMessage(context, 'Alert!', e.toString(), []);
+                        }
+                      } catch (e) {
+                        ShowMessage(context, 'Alert!', e.toString(), []);
+                      }
+                      isLoading = false;
+                      setState(() {});
+                    }
+                  },
+                  child: const Text('Sign In'),
+                ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
