@@ -1,0 +1,1 @@
+String Logo = 'assets/images/scholar.png';

@@ -1,4 +1,6 @@
-import 'package:chat_app/functions/functions.dart';
+import 'package:chat_app/helper/constants.dart';
+import 'package:chat_app/helper/show_message.dart';
+import 'package:chat_app/models/authintication_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -34,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/scholar.png', height: 100),
+              Image.asset(Logo, height: 100),
               const Text(
                 'Scholar Chat',
                 style: TextStyle(
@@ -121,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         setState(() {});
                         if (password == confirmedPassword) {
                           try {
-                            await SignUp(email!, password!);
+                            await Authintication().SignUp(email!, password!);
                             ShowMessage(
                               context,
                               'Welcome, $name',
