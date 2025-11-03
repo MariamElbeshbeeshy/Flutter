@@ -2,6 +2,7 @@ import 'package:chat_app/helper/constants.dart';
 import 'package:chat_app/helper/show_message.dart';
 import 'package:chat_app/models/authintication_model.dart';
 import 'package:chat_app/pages/Sign_up_page.dart';
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(Logo, height: 100),
+            Image.asset(logo, height: 100),
             const Text(
               'Scholar Chat',
               style: TextStyle(
@@ -94,7 +95,13 @@ class _SignInPageState extends State<SignInPage> {
                           context,
                           'Welcome',
                           'Signed in successfully.',
-                          [],
+                          [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, ChatPage.id),
+                              child: Text('Ok'),
+                            ),
+                          ],
                         );
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {

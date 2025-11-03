@@ -1,6 +1,7 @@
 import 'package:chat_app/helper/constants.dart';
 import 'package:chat_app/helper/show_message.dart';
 import 'package:chat_app/models/authintication_model.dart';
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -36,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(Logo, height: 100),
+              Image.asset(logo, height: 100),
               const Text(
                 'Scholar Chat',
                 style: TextStyle(
@@ -130,9 +131,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               'Signed up successfully.',
                               [
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
+                                  onPressed: () =>
+                                   Navigator.pushNamed(context, ChatPage.id),
                                   child: const Text('OK'),
                                 ),
                               ],
