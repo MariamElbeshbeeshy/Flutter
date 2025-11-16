@@ -98,7 +98,7 @@ class _SignInPageState extends State<SignInPage> {
                           [
                             TextButton(
                               onPressed: () =>
-                                  Navigator.pushNamed(context, ChatPage.id),
+                                  Navigator.pushNamed(context, ChatPage.id, arguments: email),
                               child: Text('Ok'),
                             ),
                           ],

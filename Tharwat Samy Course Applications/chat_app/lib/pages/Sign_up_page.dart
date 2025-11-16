@@ -132,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               [
                                 TextButton(
                                   onPressed: () =>
-                                   Navigator.pushNamed(context, ChatPage.id),
+                                   Navigator.pushNamed(context, ChatPage.id, arguments: email),
                                   child: const Text('OK'),
                                 ),
                               ],

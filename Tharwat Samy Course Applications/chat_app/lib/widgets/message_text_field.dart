@@ -2,12 +2,16 @@ import 'package:chat_app/helper/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+  
 class MessageTextField extends StatefulWidget {
-  MessageTextField({super.key});
+  final String email;
+  MessageTextField({super.key, required this.email});
 
   @override
   State<MessageTextField> createState() => _MessageTextFieldState();
 }
+
+
 
 class _MessageTextFieldState extends State<MessageTextField> {
   final TextEditingController _controller = TextEditingController();
@@ -24,7 +28,11 @@ class _MessageTextFieldState extends State<MessageTextField> {
   void _sendMessage() {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-    Messages.add({'Text': text, 'UserID': 'Sender', 'timestamp': FieldValue.serverTimestamp(),});
+    Messages.add({
+      'content': text,
+      'senderId': widget.email,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
     _controller.clear();
   }
 

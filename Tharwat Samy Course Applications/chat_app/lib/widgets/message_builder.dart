@@ -1,14 +1,42 @@
+import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/widgets/recieved_chat_bubble.dart';
 import 'package:chat_app/widgets/sent_chat_bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class MessageBuilder extends StatelessWidget {
-  MessageBuilder({super.key});
+class MessageBuilder extends StatefulWidget {
+  String email;
+   MessageBuilder({super.key, required this.email});
+
+  @override
+  State<MessageBuilder> createState() => _MessageBuilderState();
+}
+
+class _MessageBuilderState extends State<MessageBuilder> {
+  ScrollController scrollController = ScrollController();
+
+  int _prevMessageCount = 0;
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToEnd() {
+    // Check if the controller is attached and we are near the bottom (0.0)
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.minScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
 
   final Stream<QuerySnapshot> messagesStream = FirebaseFirestore.instance
       .collection('Messages')
-      .orderBy('timestamp', descending: true)
+      .orderBy('createdAt', descending: true)
       .snapshots();
 
   @override
@@ -24,8 +52,24 @@ class MessageBuilder extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
-          final docs = snapshot.data!.docs;
+
+          final messages = snapshot.data!.docs;
+          List<MessageModel> messagesList = [];
+          for (int i = 0; i < messages.length; i++) {
+            messagesList.add(MessageModel.fromJson(messages[i]));
+          }
+
+          final currentMessageCount = messages.length;
+          if (currentMessageCount > _prevMessageCount) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _scrollToEnd();
+            });
+          }
+
+          _prevMessageCount = currentMessageCount;
+
           return ListView.builder(
+            controller: scrollController,
             reverse: true,
             padding: EdgeInsets.only(
               top: 8,
@@ -33,16 +77,17 @@ class MessageBuilder extends StatelessWidget {
               right: 12,
               bottom: MediaQuery.of(context).viewInsets.bottom + 8,
             ),
-            itemCount: docs.length,
+            itemCount: messagesList.length,
             itemBuilder: (context, index) {
-              final data = docs[index].data() as Map<String, dynamic>;
-              final text = data['Text'] ?? '';
-              final sentByCurrentUser = data['UserID'] == 'Sender';
+              final messageText = messagesList[index].content;
+              final sentByCurrentUser =
+                  messagesList[index].senderId == widget.email;
               return sentByCurrentUser
-                  ? SentChatBubble(data: text)
-                  : RecievedChatBubble(data: text);
+                  ? SentChatBubble(data: messageText ?? '')
+                  : RecievedChatBubble(data: messageText ?? '');
             },
           );
+          ;
         },
       ),
     );

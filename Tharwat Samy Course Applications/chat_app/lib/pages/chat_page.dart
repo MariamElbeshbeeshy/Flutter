@@ -23,6 +23,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    String? email = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -36,7 +37,12 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
-      body: Column(children: [MessageBuilder(), MessageTextField()]),
+      body: Column(
+        children: [
+          MessageBuilder(email: email ?? ''),
+          MessageTextField(email: email ?? ''),
+        ],
+      ),
     );
   }
 }
