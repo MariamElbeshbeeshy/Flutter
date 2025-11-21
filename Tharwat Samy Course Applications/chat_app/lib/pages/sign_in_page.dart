@@ -97,32 +97,21 @@ class _SignInPageState extends State<SignInPage> {
                           'Signed in successfully.',
                           [
                             TextButton(
-                              onPressed: () =>
-                                  Navigator.pushNamed(context, ChatPage.id, arguments: email),
+                              onPressed: () => Navigator.pushNamed(
+                                context,
+                                ChatPage.id,
+                                arguments: email,
+                              ),
                               child: Text('Ok'),
                             ),
                           ],
                         );
                       } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
+                        if (e.code == 'invalid-credential') {
                           ShowMessage(
                             context,
                             'Alert!',
-                            'No user found for that email.',
-                            [],
-                          );
-                        } else if (e.code == 'wrong-password') {
-                          ShowMessage(
-                            context,
-                            'Alert!',
-                            'Wrong password provided for that user.',
-                            [],
-                          );
-                        } else if (e.code == 'invalid-email') {
-                          ShowMessage(
-                            context,
-                            'Alert!',
-                            'The email address is badly formatted.',
+                            'The supplied auth credential is incorrect, malformed or has expired.',
                             [],
                           );
                         } else {
