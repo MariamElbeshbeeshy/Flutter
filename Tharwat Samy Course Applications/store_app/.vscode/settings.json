@@ -1,5 +1,6 @@
 {
-    "chat.disableAIFeatures": true,
+    "chat.disableAIFeatures": false,
     "editor.suggest.showInlineDetails": false,
-    "cmake.sourceDirectory": "F:/CATian/Flutter/Tharwat Samy Course Applications/store_app/linux"
+    "cmake.sourceDirectory": "F:/CATian/Flutter/Tharwat Samy Course Applications/store_app/linux",
+    "editor.inlineSuggest.enabled": false
 }
