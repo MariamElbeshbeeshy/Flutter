@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store/widgets/product_card.dart';
+import 'package:store/widgets/product_card_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,7 +16,9 @@ class HomeScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
         ],
       ),
-      body: ProductCard(),
+      body: ProductCardBuilder(),
     );
   }
 }
+
+

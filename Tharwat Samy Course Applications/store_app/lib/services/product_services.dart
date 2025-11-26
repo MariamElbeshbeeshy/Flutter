@@ -65,16 +65,21 @@ class ProductServices {
   // get all products method
   Future<List<ProductModel>> getAllProducts() async {
     Response response = await Api().get(uri: baseURL);
-    List<Map<String, dynamic>> data = response.data;
+    List<dynamic> data = response.data;
 
-    List<ProductModel> Products = [];
+    List<ProductModel> products = [];
 
     for (var element in data) {
       ProductModel product = ProductModel.fromJson(element);
-      Products.add(product);
+      products.add(product);
     }
-
-    return Products;
+    if (products.isEmpty) {
+      throw Exception('data isn\'t decoded right' );
+    }else{
+      print(products);
+      return products;
+    }
+    
   }
 
   // get category products method

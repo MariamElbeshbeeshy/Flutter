@@ -1,6 +1,6 @@
 class RatingModel {
-  double rate;
-  int rating_count;
+  dynamic rate;
+  int? rating_count;
 
   RatingModel({required this.rate, required this.rating_count});
 

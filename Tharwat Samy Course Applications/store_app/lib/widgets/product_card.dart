@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:store/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
-    super.key,
-  });
+  final ProductModel product;
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -19,35 +19,31 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Image.network(
-                    'https://img.freepik.com/free-photo/beautiful-elegance-luxury-fashion-green-handbag_1203-7655.jpg?semt=ais_hybrid&w=740&q=80',
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.contain,
-                    alignment: AlignmentGeometry.topCenter,
-                  ),
+                Image.network(
+                  product.image,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.contain,
+                  alignment: AlignmentGeometry.topCenter,
                 ),
               ],
             ),
             SizedBox(height: 8),
             Text(
-              'Product Name',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 117, 116, 116),
-              ),
+              product.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: const Color.fromARGB(255, 117, 116, 116)),
               textAlign: TextAlign.left,
             ),
             Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('\$200'),
-    
-                SizedBox(width: 50),
+                Text('\$${product.price}'),
                 IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.favorite, color: Colors.grey),
