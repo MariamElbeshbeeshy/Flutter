@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/models/product_model.dart';
+import 'package:store/screens/product_details_screen.dart';
 import 'package:store/services/product_services.dart';
 import 'package:store/widgets/product_card.dart';
 
@@ -18,6 +19,7 @@ class _ProductCardBuilderState extends State<ProductCardBuilder> {
     products = ProductServices().getAllProducts();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ProductModel>>(
@@ -31,7 +33,19 @@ class _ProductCardBuilderState extends State<ProductCardBuilder> {
               childAspectRatio: 1,
             ),
             itemCount: products.length,
-            itemBuilder: (context, index) => ProductCard(product: products[index],),
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () => Navigator.pushNamed(
+                context,
+                ProductDetailsScreen.id,
+                arguments: products[index],
+              ),
+              child: ProductCard(
+                product: products[index],
+                textLinesNo: 1,
+                imageHeight: 100,
+                imageWidth: 100,
+              ),
+            ),
           );
         } else {
           return Center(child: CircularProgressIndicator());

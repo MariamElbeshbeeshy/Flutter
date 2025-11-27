@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:store/screens/add_product_screen.dart';
 import 'package:store/widgets/product_card_builder.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   static String id = 'home screen';
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +23,10 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: ProductCardBuilder(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, AddProductScreen.id),
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
-
-

@@ -7,6 +7,7 @@ class ProductModel {
   String description;
   String category;
   String image;
+  bool favorited = false;
   RatingModel? rating;
 
   // constructor
@@ -18,6 +19,7 @@ class ProductModel {
     required this.category,
     required this.image,
     this.rating,
+    required this.favorited,
   });
 
   // factory constructor
@@ -30,6 +32,7 @@ class ProductModel {
       category: jsonData['category'],
       image: jsonData['image'],
       rating: RatingModel.fromJson(jsonData['rating']),
+      favorited: false,
     );
   }
 }

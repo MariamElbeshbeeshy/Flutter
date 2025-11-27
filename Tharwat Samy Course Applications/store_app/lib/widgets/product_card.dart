@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:store/models/product_model.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final ProductModel product;
-  const ProductCard({super.key, required this.product});
+  final int textLinesNo;
+  final double imageHeight;
+  final double imageWidth;
 
+  const ProductCard({
+    super.key,
+    required this.product,
+    required this.textLinesNo,
+    required this.imageHeight,
+    required this.imageWidth,
+  });
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,9 +38,9 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.network(
-                  product.image,
-                  height: 100,
-                  width: 100,
+                  widget.product.image,
+                  height: widget.imageHeight,
+                  width: widget.imageWidth,
                   fit: BoxFit.contain,
                   alignment: AlignmentGeometry.topCenter,
                 ),
@@ -33,8 +48,8 @@ class ProductCard extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              product.title,
-              maxLines: 1,
+              widget.product.title,
+              maxLines: widget.textLinesNo,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: const Color.fromARGB(255, 117, 116, 116)),
               textAlign: TextAlign.left,
@@ -43,10 +58,19 @@ class ProductCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('\$${product.price}'),
+                Text('\$${widget.product.price}'),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite, color: Colors.grey),
+                  onPressed: () {
+                    setState(() {
+                      widget.product.favorited = !widget.product.favorited;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    color: (widget.product.favorited)
+                        ? Colors.red
+                        : Colors.grey,
+                  ),
                 ),
               ],
             ),

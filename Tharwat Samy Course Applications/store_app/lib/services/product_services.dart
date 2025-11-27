@@ -33,6 +33,7 @@ class ProductServices {
       description: description,
       category: category,
       image: image,
+      favorited: false,
     );
 
     return addedProduct;
@@ -74,12 +75,10 @@ class ProductServices {
       products.add(product);
     }
     if (products.isEmpty) {
-      throw Exception('data isn\'t decoded right' );
-    }else{
-      print(products);
+      throw Exception('data isn\'t decoded right');
+    } else {
       return products;
     }
-    
   }
 
   // get category products method
