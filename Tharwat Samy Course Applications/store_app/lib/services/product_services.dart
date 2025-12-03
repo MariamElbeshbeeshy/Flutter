@@ -29,7 +29,7 @@ class ProductServices {
     ProductModel addedProduct = ProductModel(
       id: productID,
       title: title,
-      price: double.parse(price),
+      price: price,
       description: description,
       category: category,
       image: image,
@@ -40,22 +40,15 @@ class ProductServices {
   }
 
   // update product method
-  Future<ProductModel> updateProduct({
-    required int id,
-    required String title,
-    required String price,
-    required String description,
-    required String image,
-    required String category,
-  }) async {
+  Future<ProductModel> updateProduct({required ProductModel product}) async {
     Response response = await Api().put(
-      url: '$baseURL/$id',
+      url: '$baseURL/${product.id}',
       data: {
-        'title': title,
-        'price': price,
-        'description': description,
-        'image': image,
-        'category': category,
+        'title': product.title,
+        'price': product.price,
+        'description': product.description,
+        'image': product.image,
+        'category': product.category,
       },
     );
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class Api {
   // get method
@@ -24,7 +25,7 @@ class Api {
     if (token != null) {
       headers.addAll({'Authorization': 'Bearer $token'});
     }
-
+    debugPrint('url:$url, body:$data, token:$token');
     Response response = await Dio().post(
       url,
       data: data,
@@ -32,6 +33,7 @@ class Api {
     );
 
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      debugPrint('response data:$data');
       return response;
     } else {
       throw Exception(
@@ -49,10 +51,12 @@ class Api {
     Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
-    
+
     if (token != null) {
       headers.addAll({'Authorization': 'Bearer $token'});
     }
+
+    debugPrint('url:$url, body:$data, token:$token');
 
     Response response = await Dio().put(
       url,
@@ -61,6 +65,7 @@ class Api {
     );
 
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      debugPrint('response data:$data');
       return response;
     } else {
       throw Exception(

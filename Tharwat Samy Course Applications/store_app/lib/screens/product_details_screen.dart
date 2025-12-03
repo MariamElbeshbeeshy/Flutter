@@ -28,45 +28,54 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
         ],
       ),
-      body: Column(
-        children: [
-          ProductCard(
-            product: product!,
-            textLinesNo: 10,
-            imageHeight: 250,
-            imageWidth: 300,
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsetsGeometry.fromLTRB(16, 5, 16, 0),
-              child: Text(
-                product.category,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                //textAlign: TextAlign.left,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ProductCard(
+              product: product!,
+              textLinesNo: 10,
+              imageHeight: 250,
+              imageWidth: 300,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsetsGeometry.fromLTRB(16, 5, 16, 0),
+                child: Text(
+                  product.category,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                  //textAlign: TextAlign.left,
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsetsGeometry.fromLTRB(16, 5, 16, 0),
-              child: Text(
-                product.description,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-                //textAlign: TextAlign.left,
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsetsGeometry.fromLTRB(16, 5, 16, 0),
+                child: Text(
+                  product.description,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                  //textAlign: TextAlign.left,
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: OutlinedButton(onPressed: () {}, child: Text('Add to Cart')),
-          ),
-        ],
+            SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: OutlinedButton(
+                onPressed: () {},
+                child: Text('Add to Cart'),
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, UpdateProductScreen.id, arguments: product),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          UpdateProductScreen.id,
+          arguments: product,
+        ),
         child: Icon(Icons.edit),
       ),
     );
