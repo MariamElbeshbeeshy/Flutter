@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store/models/product_model.dart';
+import 'package:store/services/product_services.dart';
 
 class ProductCard extends StatefulWidget {
   final ProductModel product;
@@ -59,18 +61,23 @@ class _ProductCardState extends State<ProductCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('\$${widget.product.price}'),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.product.favorited = !widget.product.favorited;
-                    });
+                Consumer<ProductServices>(
+                  builder: (context, productService, child) {
+                    return IconButton(
+                      onPressed: () {
+                        productService.updateFavoritedStatus(
+                          widget.product.id!,
+                          !widget.product.favorited,
+                        );
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        color: (widget.product.favorited)
+                            ? Colors.red
+                            : Colors.grey,
+                      ),
+                    );
                   },
-                  icon: Icon(
-                    Icons.favorite,
-                    color: (widget.product.favorited)
-                        ? Colors.red
-                        : Colors.grey,
-                  ),
                 ),
               ],
             ),

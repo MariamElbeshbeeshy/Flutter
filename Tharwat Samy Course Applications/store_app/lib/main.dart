@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store/screens/add_product_screen.dart';
+import 'package:store/screens/category_products_screen.dart';
 import 'package:store/screens/home_screen.dart';
 import 'package:store/screens/product_details_screen.dart';
 import 'package:store/screens/update_product_screen.dart';
+import 'package:store/services/product_services.dart';
 
 void main() async {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ProductServices(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -59,6 +67,7 @@ class MainApp extends StatelessWidget {
         ProductDetailsScreen.id: (context) => ProductDetailsScreen(),
         UpdateProductScreen.id: (context) => UpdateProductScreen(),
         AddProductScreen.id: (context) => AddProductScreen(),
+        CategoryProducts.id: (context)=> CategoryProducts(),
       },
       initialRoute: HomeScreen.id,
     );

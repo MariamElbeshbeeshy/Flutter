@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 import 'package:store/helper/show_message.dart';
 import 'package:store/models/product_model.dart';
 import 'package:store/screens/home_screen.dart';
@@ -27,6 +28,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       inAsyncCall: isLoading,
       child: Scaffold(
         appBar: AppBar(
+          foregroundColor: Colors.deepPurple,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () => Navigator.pop(context),
@@ -121,8 +123,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         setState(() {
                           isLoading = true;
                         });
-                        ProductModel addedProduct = await ProductServices()
-                            .addProduct(
+                        ProductModel addedProduct =
+                            await Provider.of<ProductServices>(
+                              context,
+                              listen: false,
+                            ).addProduct(
                               title: title!,
                               description: description!,
                               category: category!,

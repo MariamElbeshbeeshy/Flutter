@@ -18,6 +18,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ModalRoute.of(context)!.settings.arguments as ProductModel?;
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.deepPurple,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),

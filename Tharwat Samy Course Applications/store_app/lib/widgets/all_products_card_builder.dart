@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store/models/product_model.dart';
 import 'package:store/screens/product_details_screen.dart';
 import 'package:store/services/product_services.dart';
 import 'package:store/widgets/product_card.dart';
 
 class ProductCardBuilder extends StatefulWidget {
-  const ProductCardBuilder({super.key});
-
+  const ProductCardBuilder({
+    super.key,
+    required this.service,
+    required this.categoryName,
+  });
+  final String service, categoryName;
   @override
   State<ProductCardBuilder> createState() => _ProductCardBuilderState();
 }
@@ -16,17 +21,17 @@ class _ProductCardBuilderState extends State<ProductCardBuilder> {
   @override
   void initState() {
     super.initState();
-    products = ProductServices().getAllProducts();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProductServices>(context, listen: false).getAllProducts();
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<ProductModel>>(
-      future: products,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<ProductModel> products = snapshot.data!;
+    return Consumer<ProductServices>(
+      builder: (context, productService, child) {
+        final List<ProductModel> products = productService.products;
+        if (products.isNotEmpty) {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
