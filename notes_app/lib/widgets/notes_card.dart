@@ -5,57 +5,64 @@ class NotesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(16.0),
-      height: 150,
-      width: double.infinity,
+    return GestureDetector(
+      onTap: () => {},
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(26, 20.0, 5, 20.0),
+        margin: EdgeInsets.all(16.0),
+        width: double.infinity,
 
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 247, 223, 152),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 247, 223, 152),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Note Title",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.delete),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                "Note Title",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                width: 350,
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
                   'This is a note card. You can add your notes here.',
+                  maxLines: 3,
+                  overflow: TextOverflow.fade,
                   style: TextStyle(
                     fontSize: 16.0,
                     color: const Color.fromARGB(221, 84, 83, 83),
                   ),
                 ),
               ),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.delete),
+                color: Colors.black87,
+                iconSize: 32.0,
+                padding: EdgeInsets.zero,
+              ),
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Text(
-                '10 Dec 2025',
-                style: TextStyle(
-                  fontSize: 12.0,
-                  color: const Color.fromARGB(221, 84, 83, 83),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [],
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Text(
+                  '10 Dec 2025',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: const Color.fromARGB(221, 84, 83, 83),
+                  ),
                 ),
               ),
             ),

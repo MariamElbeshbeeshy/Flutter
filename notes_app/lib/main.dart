@@ -20,6 +20,7 @@ class NotesApp extends StatelessWidget {
           backgroundColor: kDarkBackgroundColor,
           foregroundColor: Colors.white,
         ),
+        fontFamily: 'Poppins',
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(body: Center(child: NotesView())),
