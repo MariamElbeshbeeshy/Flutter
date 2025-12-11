@@ -9,7 +9,7 @@ class NotesCard extends StatelessWidget {
       onTap: () => {},
       child: Container(
         padding: const EdgeInsets.fromLTRB(26, 20.0, 5, 20.0),
-        margin: EdgeInsets.all(16.0),
+        margin: EdgeInsets.fromLTRB(16.0, 16, 16, 0),
         width: double.infinity,
 
         decoration: BoxDecoration(

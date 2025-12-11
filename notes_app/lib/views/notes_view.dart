@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/helper/constants.dart';
+import 'package:notes_app/widgets/add_note_bottom_sheet.dart';
 import 'package:notes_app/widgets/custom_search_icon.dart';
 import 'package:notes_app/widgets/notes_card_list_builder.dart';
 
@@ -11,10 +13,15 @@ class NotesView extends StatelessWidget {
       appBar: AppBar(title: Text('Notes'), actions: [CustomSearchIcon()]),
       body: const NotesCardListBuilder(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.amber,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => AddNoteBottomSheet(),
+          );
+        },
+        backgroundColor: kPrimaryColor,
         shape: CircleBorder(),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Colors.black),
       ),
     );
   }
