@@ -11,7 +11,7 @@ class EditNoteView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notes'),
-        actions: [CustomIconButton(icon: Icons.check, onPressed: () => {})],
+        actions: [CustomIconButton(icon: Icons.check, onPressed: () => Navigator.pop(context))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

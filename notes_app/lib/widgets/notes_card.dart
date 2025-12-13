@@ -6,7 +6,7 @@ class NotesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {},
+      onTap: () => Navigator.pushNamed(context, 'edit_note_view'),
       child: Container(
         padding: const EdgeInsets.fromLTRB(26, 20.0, 5, 20.0),
         margin: EdgeInsets.fromLTRB(16.0, 16, 16, 0),
